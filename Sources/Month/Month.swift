@@ -80,3 +80,14 @@ extension Month: Hashable {
     hasher.combine(year)
   }
 }
+
+// MARK: - Codable
+
+extension Month.Name: Codable {}
+
+extension Month: Codable {
+  enum CodingKeys: String, CodingKey {
+    case year
+    case name = "month"
+  }
+}
