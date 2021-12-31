@@ -19,3 +19,20 @@ extension Month: CustomStringConvertible {
     "\(name.rawValue)/\(year)"
   }
 }
+
+// MARK: - Comparable
+
+extension Month.Name: Comparable {
+  public static func < (lhs: Month.Name, rhs: Month.Name) -> Bool {
+    lhs.rawValue < rhs.rawValue
+  }
+}
+
+extension Month: Comparable {
+  public static func < (lhs: Month, rhs: Month) -> Bool {
+    if lhs.year == rhs.year {
+      return lhs.name < rhs.name
+    }
+    return lhs.year < rhs.year
+  }
+}
