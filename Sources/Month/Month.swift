@@ -36,3 +36,38 @@ extension Month: Comparable {
     return lhs.year < rhs.year
   }
 }
+
+// MARK: - Strideable & Additive
+
+extension Month: Strideable {
+  public func distance(to other: Month) -> Int {
+    let monthDistance = other.name.rawValue - name.rawValue
+    let yearDistance = other.year - year
+    return yearDistance * 12 + monthDistance
+  }
+
+  public func advanced(by step: Int) -> Month {
+    let newMonthValue = year * 12 + name.rawValue - 1 + step
+    guard let newName = Name(rawValue: (newMonthValue % 12) + 1) else {
+      fatalError("get invalid RawValue: \(newMonthValue)")
+    }
+    let newYear = newMonthValue / 12
+    return Month(newName, in: newYear)
+  }
+
+  static func + (lhs: Self, rhs: Int) -> Self {
+    lhs.advanced(by: rhs)
+  }
+
+  static func - (lhs: Self, rhs: Int) -> Self {
+    lhs + -rhs
+  }
+
+  static func += (lhs: inout Self, rhs: Int) {
+    lhs = lhs.advanced(by: rhs)
+  }
+
+  static func -= (lhs: inout Self, rhs: Int) {
+    lhs += -rhs
+  }
+}
