@@ -71,3 +71,12 @@ extension Month: Strideable {
     lhs += -rhs
   }
 }
+
+// MARK: - Hashable
+
+extension Month: Hashable {
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(name)
+    hasher.combine(year)
+  }
+}
