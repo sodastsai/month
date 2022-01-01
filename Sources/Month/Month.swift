@@ -1,4 +1,4 @@
-//
+import Foundation
 
 public struct Month {
   public enum Name: Int, RawRepresentable {
@@ -11,6 +11,26 @@ public struct Month {
   public init(_ name: Name, in year: Int) {
     self.name = name
     self.year = year
+  }
+}
+
+// MARK: - Initializers
+
+public extension Month {
+  init(of date: Date) {
+    let components = Calendar.current.dateComponents([.year, .month], from: date)
+    guard
+      let year = components.year,
+      let monthInt = components.month,
+      let month = Name(rawValue: monthInt)
+    else {
+      fatalError("Failed to parse from \(date)")
+    }
+    self = .init(month, in: year)
+  }
+
+  static var current: Month {
+    .init(of: Date())
   }
 }
 
