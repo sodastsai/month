@@ -14,12 +14,6 @@ public struct Month {
   }
 }
 
-extension Month: CustomStringConvertible {
-  public var description: String {
-    "\(name.rawValue)/\(year)"
-  }
-}
-
 // MARK: - Comparable
 
 extension Month.Name: Comparable {
@@ -89,5 +83,13 @@ extension Month: Codable {
   enum CodingKeys: String, CodingKey {
     case year
     case name = "month"
+  }
+}
+
+// MARK: - Misc
+
+extension Month: CustomStringConvertible {
+  public var description: String {
+    "\(name.rawValue)/\(year)"
   }
 }
