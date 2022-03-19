@@ -21,7 +21,9 @@ let package = Package(
     .target(name: "Month"),
     .target(
       name: "MonthArgumentParser",
-      dependencies: [.product(name: "ArgumentParser", package: "swift-argument-parser")]
+      dependencies: [
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
+      ]
     ),
     .testTarget(name: "MonthTests",
                 dependencies: [
